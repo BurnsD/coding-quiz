@@ -1,3 +1,25 @@
+const startBtn = document.getElementsById('start');
+var timerEl = getElementsById('timer');
+
+var time = 100;
+var timerInterval;
+
+function startQuiz() {
+    timerInterval = setInterval(() => {
+        time--;
+        timerEl = time
+        if (time <= 0){
+            endQuiz();
+        }
+    }, 1000);
+}
+
+function endQuiz() {
+    clearInterval(timerEl);
+}
+
+startBtn.onclick = startQuiz;
+
 /*
 const quizData = [
     {

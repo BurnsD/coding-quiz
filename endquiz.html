@@ -11,14 +11,16 @@
     <div class="contianer">
         <div id="end" class="flex-center flex-column">
             <h1 id="finalScore">0</h1>
-            <form class="end-form-contianer">
+            <form class="end-form-container">
                 <h2 id="end-text">
                     Enter you Initials to save your score!
                 </h2>
                 <input type="text" name="name" id="username"
                 placeholder="Enter Your Initials">
-                <button class="btn" id="saveScoreBtn"></button>
+                <button class="btn" id="saveScoreBtn" type="submit" onclick="saveHighScore(event)">Save</button>
             </form>
+            <a href="./game.html" class="btn">Play Again</a>
+            <a href="./index.html" class="btn">Go Home</a>
         </div>
     </div>
 </body>

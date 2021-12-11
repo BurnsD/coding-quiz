@@ -24,26 +24,26 @@ let questions = [
     {
         question: 'What is the answer to this question?',
         choice1: 'Answer 1',
-        choice2: 'This is the correct answer',
+        choice2: 'answer 2',
         choice3: 'aNsWeR3',
-        choice4: 'AnSwEr 4',
-        answer: 2,
+        choice4: 'This is the correct answer',
+        answer: 4,
     },
     {
         question: 'What is the answer to this question?',
         choice1: 'Answer 1',
-        choice2: 'This is the correct answer',
-        choice3: 'aNsWeR3',
+        choice2: 'answer 2',
+        choice3: 'This is the correct answer',
         choice4: 'AnSwEr 4',
-        answer: 2,
+        answer: 3,
     },
     {
         question: 'What is the answer to this question?',
-        choice1: 'Answer 1',
-        choice2: 'This is the correct answer',
+        choice1: 'This is the correct answer',
+        choice2: 'answer 2',
         choice3: 'aNsWeR3',
         choice4: 'AnSwEr 4',
-        answer: 2,
+        answer: 1,
     },
     {
         question: 'What is the answer to this question?',
@@ -71,8 +71,8 @@ getNewQuestion = () => {
     if(availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
         // Stores the most recent score to local storage
         localStorage.setItem('mostRecentScore', score)
-        // Sets score to the high score board
-        return window.location.assign('endquiz.html')
+        // Sets score to the score board
+        return window.location.assign('./endquiz.html')
     }
 
     questionCounter++

@@ -66,6 +66,10 @@ body {
     width: 0%;
 }
 
+.timer{
+    color: white;
+}
+
 
 /* adjustments for phone screens */
 @media screen and (max-width: 768px) {
