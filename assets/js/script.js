@@ -1,5 +1,7 @@
-const startBtn = document.getElementsById('start');
-var timerEl = getElementsById('timer');
+/* atmpt at timer */
+/*
+const startBtn = document.querySelector('startBtn');
+var timerEl = document.querySelector('timer');
 
 var time = 100;
 var timerInterval;
@@ -19,6 +21,7 @@ function endQuiz() {
 }
 
 startBtn.onclick = startQuiz;
+*/
 
 /* oiriginal code - keeping it here but ineffective as reference material
 

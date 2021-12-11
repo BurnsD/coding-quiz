@@ -76,7 +76,7 @@ getNewQuestion = () => {
     }
 
     questionCounter++
-    // shows question "1"
+    // Displays which question the quiz taker is on
     progressText.innerText = `Question ${questionCounter} of ${MAX_QUESTIONS}`
     // progressBarFull.style.width = `${(questionCounter/MAX_QUESTIONS) * 100}%`
     
