@@ -63,11 +63,11 @@ function loadQuiz() {
 }
 
 function deselectAnswers() {
-    answerEls.forEach(answerEls => answerEls.checked = false)
+    answerEls.forEach(answerEl => answerEl.checked = false)
 }
 
 function getSelected() {
-    let answerEls
+    let answer
     answerEls.forEach(answerEl => {
         if(answerEl.checked) {
             answer = answerEl.id
@@ -75,3 +75,20 @@ function getSelected() {
     })
     return answer
 }
+
+submitBtn.addEventListener('click', () => {
+    const answer = getSelected()
+    if(answer){
+        if(answer === quizData[currentQuiz].correct){
+            score++
+        }
+
+        currentQuiz++
+
+        if(currentQuiz < quizData.length){
+            loadQuiz()
+        }else {
+            quiz.innerHTML = ''
+        }
+    }
+}) 
