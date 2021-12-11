@@ -1,3 +1,4 @@
+/*
 const quizData = [
     {
         question: "What language would I use to style a web application?",
@@ -91,4 +92,4 @@ submitBtn.addEventListener('click', () => {
             quiz.innerHTML = ''
         }
     }
-}) 
+}) */

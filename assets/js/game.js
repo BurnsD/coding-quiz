@@ -3,7 +3,7 @@ const question = document.querySelector('#question');
 const choices = Array.from(document.querySelectorAll('.choice-text'));
 const progressText = document.querySelector('#progressText');
 const scoreText = document.querySelector('#score');
-const ProgressBarFull = document.querySelector('#progressBarFull');
+const progressBarFull = document.querySelector('#progressBarFull');
 
 let currentQuestion = {}
 let acceptingAnswers = true
@@ -68,16 +68,17 @@ startGame = () => {
 }
 
 getNewQuestion = () => {
-    if(availableQuestions.length === 0 || questionsCounter > MAX_QUESTIONS) {
+    if(availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
         // Stores the most recent score to local storage
         localStorage.setItem('mostRecentScore', score)
         // Sets score to the high score board
-        return window.location.assign('')
+        return window.location.assign('endquiz.html')
     }
 
     questionCounter++
+    // shows question "1"
     progressText.innerText = `Question ${questionCounter} of ${MAX_QUESTIONS}`
-    ProgressBarFull.style.width = `${(questionCounter/MAX_QUESTIONS) * 100}%`
+    // progressBarFull.style.width = `${(questionCounter/MAX_QUESTIONS) * 100}%`
     
     const questionsIndex = Math.floor(Math.random() * availableQuestions.length)
     // Keeps track of what question the quiz taker is on
@@ -102,7 +103,7 @@ choices.forEach(choice => {
         const selectedChoice = e.target
         const selectedAnswer = selectedChoice.dataset['number']
 
-        let classToApply = selectedAnswer === currentQuestion.answer ? 'correct' :
+        let classToApply = selectedAnswer == currentQuestion.answer ? 'correct' :
         'incorrect'
 
         if(classToApply === 'correct') {
@@ -118,3 +119,11 @@ choices.forEach(choice => {
         }, 750)
     })
 })
+
+// adding points to score
+incrementScore = num => {
+    score +=num
+    scoreText.innerText = score
+}
+
+startGame();
