@@ -1,6 +1,6 @@
-cosnt quizData = [
+const quizData = [
     {
-        question: "What language would I use to style a web application?"
+        question: "What language would I use to style a web application?",
         a: "the first answer",
         b: "the second answer",
         c: "the third answer",
@@ -8,7 +8,7 @@ cosnt quizData = [
         correct: "d"
     },
     {
-        question: "What language would I use to style a web application?"
+        question: "What language would I use to style a web application?",
         a: "the first answer",
         b: "the second answer",
         c: "the third answer",
@@ -16,7 +16,7 @@ cosnt quizData = [
         correct: "d"
     },
     {
-        question: "What language would I use to style a web application?"
+        question: "What language would I use to style a web application?",
         a: "the first answer",
         b: "the second answer",
         c: "the third answer",
@@ -24,7 +24,7 @@ cosnt quizData = [
         correct: "d"
     },
     {
-        question: "What language would I use to style a web application?"
+        question: "What language would I use to style a web application?",
         a: "the first answer",
         b: "the second answer",
         c: "the third answer",
@@ -35,7 +35,7 @@ cosnt quizData = [
 ];
 
 const quiz = document.getElementById('quiz')
-const answerEl = document.querySelectorAll('.answer')
+const answerEls = document.querySelectorAll('.answer')
 const questionEl = document.getElementById('question')
 const a_txt = document.getElementById('a_txt')
 const b_txt = document.getElementById('b_txt')
@@ -48,7 +48,30 @@ let score = 0
 
 loadQuiz();
 
-function loadQuiz(){
-    
+// Function used to load quiz text into the web browser
+function loadQuiz() {
+
+    deselectAnswers()
+
+    const currentQuizData = quizData[currentQuiz]
+
+    questionEl.innerText = currentQuizData.question
+    a_txt.innerText = currentQuizData.a
+    b_txt.innerText = currentQuizData.b
+    c_txt.innerText = currentQuizData.c
+    d_txt.innerText = currentQuizData.d
 }
 
+function deselectAnswers() {
+    answerEls.forEach(answerEls => answerEls.checked = false)
+}
+
+function getSelected() {
+    let answerEls
+    answerEls.forEach(answerEl => {
+        if(answerEl.checked) {
+            answer = answerEl.id
+        }
+    })
+    return answer
+}
