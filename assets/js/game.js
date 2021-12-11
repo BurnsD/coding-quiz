@@ -72,7 +72,7 @@ getNewQuestion = () => {
         // Stores the most recent score to local storage
         localStorage.setItem('mostRecentScore', score)
         // Sets score to the high score board
-        return window.location.assign('./end.html')
+        return window.location.assign('')
     }
 
     questionCounter++
@@ -80,4 +80,41 @@ getNewQuestion = () => {
     ProgressBarFull.style.width = `${(questionCounter/MAX_QUESTIONS) * 100}%`
     
     const questionsIndex = Math.floor(Math.random() * availableQuestions.length)
+    // Keeps track of what question the quiz taker is on
+    currentQuestion = availableQuestions[questionsIndex]
+    question.innerText = currentQuestion.question
+
+    choices.forEach(choice => {
+        const number = choice.dataset['number']
+        choice.innerText = currentQuestion['choice' + number]
+    })
+
+    availableQuestions.splice(questionsIndex, 1)
+
+    acceptingAnswers = true
 }
+
+choices.forEach(choice => {
+    choice.addEventListener('click', e => {
+        if(!acceptingAnswers) return
+
+        acceptingAnswers = false
+        const selectedChoice = e.target
+        const selectedAnswer = selectedChoice.dataset['number']
+
+        let classToApply = selectedAnswer === currentQuestion.answer ? 'correct' :
+        'incorrect'
+
+        if(classToApply === 'correct') {
+            incrementScore(SCORE_POINTS)
+        }
+
+        selectedChoice.parentElement.classList.add(classToApply)
+
+        setTimeout(() => {
+            selectedChoice.parentElement.classList.remove(classToApply)
+            getNewQuestion();
+
+        }, 750)
+    })
+})
