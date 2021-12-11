@@ -20,7 +20,9 @@ function endQuiz() {
 
 startBtn.onclick = startQuiz;
 
-/*
+/* oiriginal code - keeping it here but ineffective as reference material
+
+
 const quizData = [
     {
         question: "What language would I use to style a web application?",
