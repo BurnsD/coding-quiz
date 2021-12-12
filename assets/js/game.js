@@ -3,7 +3,23 @@ const question = document.querySelector('#question');
 const choices = Array.from(document.querySelectorAll('.choice-text'));
 const progressText = document.querySelector('#progressText');
 const scoreText = document.querySelector('#score');
-const progressBarFull = document.querySelector('#progressBarFull');
+// const progressBarFull = document.getElementById('#progressBarFull');
+const startBtn = document.getElementById('start');
+
+const startingMinutes = 2;
+let time = startingMinutes * 60;
+
+const countdownEl = document.getElementById('countdown');
+
+setInterval(updateCountdown, 1000);
+
+function updateCountdown() {
+    const minutes = Math.floor(time / 60);
+    let seconds = time % 60;
+
+    countdownEl.innerHTML = `${minutes}: ${seconds}`
+    time--;
+}
 
 let currentQuestion = {}
 let acceptingAnswers = true
@@ -56,16 +72,20 @@ let questions = [
 ]
 
 // variable for score and maximun questions in the quiz
-const SCORE_POINTS = 100
-const MAX_QUESTIONS = 5
+const SCORE_POINTS = 100;
+const MAX_QUESTIONS = 5;
+
+
 
 
 startGame = () => {
-    questionCounter = 0
-    score = 0
-    availableQuestions = [...questions]
-    getNewQuestion()
+    questionCounter = 0;
+    score = 0;
+    availableQuestions = [...questions];
+    getNewQuestion();
 }
+
+
 
 getNewQuestion = () => {
     if(availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
@@ -75,33 +95,34 @@ getNewQuestion = () => {
         return window.location.assign('./endquiz.html')
     }
 
-    questionCounter++
+    questionCounter++;
     // Displays which question the quiz taker is on
-    progressText.innerText = `Question ${questionCounter} of ${MAX_QUESTIONS}`
+    progressText.innerText = `Question ${questionCounter} of ${MAX_QUESTIONS}`;
     // progressBarFull.style.width = `${(questionCounter/MAX_QUESTIONS) * 100}%`
     
-    const questionsIndex = Math.floor(Math.random() * availableQuestions.length)
+    const questionsIndex = Math.floor(Math.random() * availableQuestions.length);
     // Keeps track of what question the quiz taker is on
-    currentQuestion = availableQuestions[questionsIndex]
-    question.innerText = currentQuestion.question
+    currentQuestion = availableQuestions[questionsIndex];
+    question.innerText = currentQuestion.question;
 
     choices.forEach(choice => {
-        const number = choice.dataset['number']
-        choice.innerText = currentQuestion['choice' + number]
+        const number = choice.dataset['number'];
+        choice.innerText = currentQuestion['choice' + number];
     })
 
-    availableQuestions.splice(questionsIndex, 1)
-
-    acceptingAnswers = true
+    availableQuestions.splice(questionsIndex, 1);
+    console.log(availableQuestions)
+    acceptingAnswers = true;
 }
 
 choices.forEach(choice => {
     choice.addEventListener('click', e => {
-        if(!acceptingAnswers) return
+        console.log(e.target);
+        if(!acceptingAnswers) return;
 
-        acceptingAnswers = false
-        const selectedChoice = e.target
-        const selectedAnswer = selectedChoice.dataset['number']
+        acceptingAnswers = false;
+        const selectedChoice = e.target;
+        const selectedAnswer = selectedChoice.dataset['number'];
 
         let classToApply = selectedAnswer == currentQuestion.answer ? 'correct' :
         'incorrect'
@@ -122,8 +143,9 @@ choices.forEach(choice => {
 
 // adding points to score
 incrementScore = num => {
-    score +=num
-    scoreText.innerText = score
+    score +=num;
+    scoreText.innerText = score;
 }
+
 
 startGame();
