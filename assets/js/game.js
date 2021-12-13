@@ -6,7 +6,8 @@ const scoreText = document.querySelector('#score');
 // const progressBarFull = document.getElementById('#progressBarFull');
 const startBtn = document.getElementById('start');
 
-const startingMinutes = 2;
+// Countdown 
+const startingMinutes = 1.5;
 let time = startingMinutes * 60;
 
 const countdownEl = document.getElementById('countdown');
@@ -17,15 +18,19 @@ function updateCountdown() {
     const minutes = Math.floor(time / 60);
     let seconds = time % 60;
 
+    seconds = seconds < 10 ? '0' + seconds : seconds;
+
     countdownEl.innerHTML = `${minutes}: ${seconds}`
     time--;
+
+    time = time < 0 ? 0 : time; 
 }
 
-let currentQuestion = {}
-let acceptingAnswers = true
-let score = 0
-let questionCounter = 0
-let availableQuestions = []
+let currentQuestion = {};
+let acceptingAnswers = true;
+let score = 0;
+let questionCounter = 0;
+let availableQuestions = [];
 
 // This is holding all of the questions text
 let questions = [
@@ -88,13 +93,13 @@ startGame = () => {
 
 
 getNewQuestion = () => {
-    if(availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
+    if(availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS || time === 0) {
         // Stores the most recent score to local storage
         localStorage.setItem('mostRecentScore', score)
         // Sets score to the score board
         return window.location.assign('./endquiz.html')
-    }
-
+    } 
+    
     questionCounter++;
     // Displays which question the quiz taker is on
     progressText.innerText = `Question ${questionCounter} of ${MAX_QUESTIONS}`;
@@ -145,7 +150,7 @@ choices.forEach(choice => {
 incrementScore = num => {
     score +=num;
     scoreText.innerText = score;
-}
+};
 
 
 startGame();
