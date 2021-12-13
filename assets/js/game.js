@@ -35,11 +35,11 @@ let availableQuestions = [];
 // This is holding all of the questions text
 let questions = [
     {
-        question: 'What is the answer to this question?',
-        choice1: 'Answer 1',
-        choice2: 'This is the correct answer',
-        choice3: 'aNsWeR3',
-        choice4: 'AnSwEr 4',
+        question: 'Which of these values is NOT considered false?',
+        choice1: '0',
+        choice2: '"0"',
+        choice3: 'null',
+        choice4: '""',
         answer: 2,
     },
     {
