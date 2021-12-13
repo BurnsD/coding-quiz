@@ -3,7 +3,6 @@ const question = document.querySelector('#question');
 const choices = Array.from(document.querySelectorAll('.choice-text'));
 const progressText = document.querySelector('#progressText');
 const scoreText = document.querySelector('#score');
-// const progressBarFull = document.getElementById('#progressBarFull');
 const startBtn = document.getElementById('start');
 
 // Countdown 
@@ -17,9 +16,9 @@ setInterval(updateCountdown, 1000);
 function updateCountdown() {
     const minutes = Math.floor(time / 60);
     let seconds = time % 60;
-
+    
     seconds = seconds < 10 ? '0' + seconds : seconds;
-
+    // Displays countdown to screen
     countdownEl.innerHTML = `${minutes}: ${seconds}`
     time--;
 
@@ -74,7 +73,7 @@ let questions = [
         choice4: 'AnSwEr 4',
         answer: 2,
     },
-]
+];
 
 // variable for score and maximun questions in the quiz
 const SCORE_POINTS = 50;
@@ -82,17 +81,17 @@ const MAX_QUESTIONS = 5;
 
 
 
-
+// Start function 
 startGame = () => {
     questionCounter = 0;
     score = 0;
     availableQuestions = [...questions];
     getNewQuestion();
-}
+};
 
-
-
+// Function for getting question text or stopping quiz
 getNewQuestion = () => {
+    // Will stop the quiz if time is depleted or no more questions aviable
     if(availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS || time === 0) {
         // Stores the most recent score to local storage
         localStorage.setItem('mostRecentScore', score)
@@ -103,7 +102,6 @@ getNewQuestion = () => {
     questionCounter++;
     // Displays which question the quiz taker is on
     progressText.innerText = `Question ${questionCounter} of ${MAX_QUESTIONS}`;
-    // progressBarFull.style.width = `${(questionCounter/MAX_QUESTIONS) * 100}%`
     
     const questionsIndex = Math.floor(Math.random() * availableQuestions.length);
     // Keeps track of what question the quiz taker is on
@@ -112,6 +110,7 @@ getNewQuestion = () => {
 
     choices.forEach(choice => {
         const number = choice.dataset['number'];
+        // Displays choices to screen
         choice.innerText = currentQuestion['choice' + number];
     })
 
@@ -128,14 +127,14 @@ choices.forEach(choice => {
         acceptingAnswers = false;
         const selectedChoice = e.target;
         const selectedAnswer = selectedChoice.dataset['number'];
-
+        // Toggle for class upon correct or incorrect answer
         let classToApply = selectedAnswer == currentQuestion.answer ? 'correct' :
         'incorrect'
-
+        // Adding points for correct answer
         if(classToApply === 'correct') {
             incrementScore(SCORE_POINTS)
         }
-
+        // Minus time for wrong answer
         if(classToApply === 'incorrect') {
             time -=25;
         }
@@ -148,7 +147,7 @@ choices.forEach(choice => {
 
         }, 750)
     })
-})
+});
 
 // adding points to score
 incrementScore = num => {

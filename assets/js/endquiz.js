@@ -1,91 +1,36 @@
-/*
-const saveScoreBtn = document.getElementById("saveScoreBtn")
-var scoreArray = [];
-
-saveScoreBtn.addEventListener('click', scoreSubmit);
-
-function scoreSubmit(){
-    var forminfoEl = document.getElementById('initials').ariaValueMax;
-
-    const entry = {
-        "initials": forminfoEl,
-        "score": score
-    };
-    localStorage.setItem(localStorage.length, JSON.stringify(entry));
-
-    displayHighScore();
-}
-*/
-
-/*
-const username = document.getElementById("username");
-const saveScoreBtn = document.getElementById('saveScoreBtn');
+const username = document.querySelector('#username');
+const saveScoreBtn = document.querySelector('#saveScoreBtn');
 const finalScore = document.querySelector('#finalScore');
 const mostRecentScore = localStorage.getItem('mostRecentScore');
-// Get highscores OR empty array for first time
+
 const highScores = JSON.parse(localStorage.getItem('highScores')) || [];
 
 const MAX_HIGH_SCORES = 5;
 
 finalScore.innerText = mostRecentScore;
-// allows save button to work once value is inputed 
+// Allows Save button to be used only when a value has been made in the initials input
 username.addEventListener('keyup', () => {
     saveScoreBtn.disabled = !username.value;
 });
-
-
-
-
+// Saves the high score
 saveHighScore = e => {
-    e.preventDefualt();
+    e.preventDefault();
 
     const score = {
         score: mostRecentScore,
         name: username.value
     }
+    
     highScores.push(score);
-    // sort high scores
-    highScores.sort( (a,b) => b.score - a.score)
-    // allows the high scores to be replaced with new ones
-    highScores.splice(5);
-
-    localStorage.setItem('highScores', JSON.stringify(highScores));
-    window.location.assign('./index.html');
-};
-*/
-const username = document.querySelector('#username')
-const saveScoreBtn = document.querySelector('#saveScoreBtn')
-const finalScore = document.querySelector('#finalScore')
-const mostRecentScore = localStorage.getItem('mostRecentScore')
-
-const highScores = JSON.parse(localStorage.getItem('highScores')) || []
-
-const MAX_HIGH_SCORES = 5
-
-finalScore.innerText = mostRecentScore
-
-username.addEventListener('keyup', () => {
-    saveScoreBtn.disabled = !username.value
-})
-
-saveHighScore = e => {
-    e.preventDefault()
-
-    const score = {
-        score: mostRecentScore,
-        name: username.value
-    }
-
-    highScores.push(score)
-
+    // sorts highscores from highest to lowest
     highScores.sort((a,b) => {
         return b.score - a.score
     })
-
-    highScores.splice(5)
-
-    localStorage.setItem('highScores', JSON.stringify(highScores))
-    window.location.assign('./index.html')
+    // Keeps highscore page to only 5 scores. 
+    highScores.splice(5);
+    // saves to local storage
+    localStorage.setItem('highScores', JSON.stringify(highScores));
+    window.location.assign('./index.html');
 
     
-}
+};
