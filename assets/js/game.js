@@ -77,7 +77,7 @@ let questions = [
 ]
 
 // variable for score and maximun questions in the quiz
-const SCORE_POINTS = 100;
+const SCORE_POINTS = 50;
 const MAX_QUESTIONS = 5;
 
 
@@ -134,6 +134,10 @@ choices.forEach(choice => {
 
         if(classToApply === 'correct') {
             incrementScore(SCORE_POINTS)
+        }
+
+        if(classToApply === 'incorrect') {
+            time -=25;
         }
 
         selectedChoice.parentElement.classList.add(classToApply)
