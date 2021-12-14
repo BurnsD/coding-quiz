@@ -3,7 +3,6 @@ const question = document.querySelector('#question');
 const choices = Array.from(document.querySelectorAll('.choice-text'));
 const progressText = document.querySelector('#progressText');
 const scoreText = document.querySelector('#score');
-// const progressBarFull = document.getElementById('#progressBarFull');
 const startBtn = document.getElementById('start');
 
 // Countdown 
@@ -17,9 +16,9 @@ setInterval(updateCountdown, 1000);
 function updateCountdown() {
     const minutes = Math.floor(time / 60);
     let seconds = time % 60;
-
+    
     seconds = seconds < 10 ? '0' + seconds : seconds;
-
+    // Displays countdown to screen
     countdownEl.innerHTML = `${minutes}: ${seconds}`
     time--;
 
@@ -35,64 +34,64 @@ let availableQuestions = [];
 // This is holding all of the questions text
 let questions = [
     {
-        question: 'What is the answer to this question?',
-        choice1: 'Answer 1',
-        choice2: 'This is the correct answer',
-        choice3: 'aNsWeR3',
-        choice4: 'AnSwEr 4',
+        question: 'Which of these values is NOT considered false?',
+        choice1: '0',
+        choice2: '"0"',
+        choice3: 'null',
+        choice4: '""',
         answer: 2,
     },
     {
-        question: 'What is the answer to this question?',
-        choice1: 'Answer 1',
-        choice2: 'answer 2',
-        choice3: 'aNsWeR3',
-        choice4: 'This is the correct answer',
+        question: 'In CSS: Which of the following is NOT a value allowed for the border-style property?',
+        choice1: 'groove',
+        choice2: 'double',
+        choice3: 'ridge',
+        choice4: 'beveled',
         answer: 4,
     },
     {
-        question: 'What is the answer to this question?',
-        choice1: 'Answer 1',
-        choice2: 'answer 2',
-        choice3: 'This is the correct answer',
-        choice4: 'AnSwEr 4',
+        question: 'If you need to position a child element in relation to its parent element, which value should you set the position property to?',
+        choice1: 'display',
+        choice2: 'static',
+        choice3: 'absolute',
+        choice4: 'relative',
         answer: 3,
     },
     {
-        question: 'What is the answer to this question?',
-        choice1: 'This is the correct answer',
-        choice2: 'answer 2',
-        choice3: 'aNsWeR3',
-        choice4: 'AnSwEr 4',
-        answer: 1,
+        question: 'What do media queries allow us to do?',
+        choice1: 'Create responsive designs.',
+        choice2: 'Play videos on our page',
+        choice3: 'Change CSS at different browser widths',
+        choice4: 'Allows embedded maps on our page',
+        answer: 3,
     },
     {
-        question: 'What is the answer to this question?',
-        choice1: 'Answer 1',
-        choice2: 'This is the correct answer',
-        choice3: 'aNsWeR3',
-        choice4: 'AnSwEr 4',
+        question: "In the DOM's event object, what does its target property refer to?",
+        choice1: 'It refers to the HTML element we want to affect as a result of our dispatched event.',
+        choice2: 'It refers to the HTML element that was interacted with to dispatch the event.',
+        choice3: 'It refers to the CSS property we want to affect as a reult of our dispacthed event',
+        choice4: 'It refers to the CSS property that was interacted with to dispacth the event',
         answer: 2,
     },
-]
+];
 
 // variable for score and maximun questions in the quiz
-const SCORE_POINTS = 100;
+const SCORE_POINTS = 50;
 const MAX_QUESTIONS = 5;
 
 
 
-
+// Start function 
 startGame = () => {
     questionCounter = 0;
     score = 0;
     availableQuestions = [...questions];
     getNewQuestion();
-}
+};
 
-
-
+// Function for getting question text or stopping quiz
 getNewQuestion = () => {
+    // Will stop the quiz if time is depleted or no more questions aviable
     if(availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS || time === 0) {
         // Stores the most recent score to local storage
         localStorage.setItem('mostRecentScore', score)
@@ -103,7 +102,6 @@ getNewQuestion = () => {
     questionCounter++;
     // Displays which question the quiz taker is on
     progressText.innerText = `Question ${questionCounter} of ${MAX_QUESTIONS}`;
-    // progressBarFull.style.width = `${(questionCounter/MAX_QUESTIONS) * 100}%`
     
     const questionsIndex = Math.floor(Math.random() * availableQuestions.length);
     // Keeps track of what question the quiz taker is on
@@ -112,6 +110,7 @@ getNewQuestion = () => {
 
     choices.forEach(choice => {
         const number = choice.dataset['number'];
+        // Displays choices to screen
         choice.innerText = currentQuestion['choice' + number];
     })
 
@@ -128,12 +127,16 @@ choices.forEach(choice => {
         acceptingAnswers = false;
         const selectedChoice = e.target;
         const selectedAnswer = selectedChoice.dataset['number'];
-
+        // Toggle for class upon correct or incorrect answer
         let classToApply = selectedAnswer == currentQuestion.answer ? 'correct' :
         'incorrect'
-
+        // Adding points for correct answer
         if(classToApply === 'correct') {
             incrementScore(SCORE_POINTS)
+        }
+        // Minus time for wrong answer
+        if(classToApply === 'incorrect') {
+            time -=25;
         }
 
         selectedChoice.parentElement.classList.add(classToApply)
@@ -144,7 +147,7 @@ choices.forEach(choice => {
 
         }, 750)
     })
-})
+});
 
 // adding points to score
 incrementScore = num => {
