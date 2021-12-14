@@ -1,6 +1,6 @@
 ## Application of a short timed coding quiz game
 
-##Features
+## Features
 
 # Start and Highscore button from a Home Page
 
