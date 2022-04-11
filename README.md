@@ -14,6 +14,8 @@
   Timed game that has  basic questions regarding HTML, CSS, and Javascript with a highscore leaderboard. You will recieve a time penalty for any incorrect answer. 
 
   Deployed application URL: https://burnsd.github.io/coding-quiz/endquiz.html
+
+  ![Screenshot](/assets/images/code-quiz.png)
   ## [License](#table-of-contents)
   This application has the following license:
   [Open](https://choosealicense.com/licenses/Open)
